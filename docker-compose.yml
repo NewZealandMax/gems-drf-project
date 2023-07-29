@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: db
+    image: postgres:13.2
+    restart: always
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+
+  gems_project:
+    container_name: gems_project
+    build: .
+    restart: always
+    ports:
+      - 8000:8000
+    command: bash -c 'python manage.py migrate && python manage.py collectstatic && 
+             gunicorn gems_project.wsgi:application --bind 0:8000 --timeout 120'
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+
+volumes:
+  db_volume:
