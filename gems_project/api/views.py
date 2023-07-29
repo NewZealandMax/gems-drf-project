@@ -3,9 +3,9 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.schemas import customer_response, deals_response, deals_schema
-from deals.models import Customer, Deal, Gem
-from deals.serializers import CustomerSerializer
+from ..deals.models import Customer, Deal, Gem
+from ..deals.serializers import CustomerSerializer
+from .schemas import customer_response, deals_response, deals_schema
 
 
 class CustomerAPIView(APIView):
@@ -52,7 +52,8 @@ class CustomerAPIView(APIView):
                             'Status': 'Error',
                             'Desc': 'Данные в \"total\" или \"quantity\" '
                                     'не являются целым числом '
-                                    '- в процессе обработки файла произошла ошибка.'
+                                    '- в процессе обработки файла '
+                                    'произошла ошибка.'
                         },
                         status=status.HTTP_400_BAD_REQUEST
                     )

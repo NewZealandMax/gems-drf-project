@@ -1,6 +1,6 @@
 from django.urls import path
 
-from api.views import CustomerAPIView
+from .views import CustomerAPIView
 
 CLIENTS_URL = 'clients/'
 

@@ -9,12 +9,18 @@ customer_response = {
                 type=openapi.TYPE_ARRAY,
                 items=openapi.Schema(
                     type=openapi.TYPE_OBJECT,
-                        properties={
-                        'username': openapi.Schema(type=openapi.TYPE_STRING),
-                        'spent_money': openapi.Schema(type=openapi.TYPE_INTEGER),
+                    properties={
+                        'username': openapi.Schema(
+                            type=openapi.TYPE_STRING
+                        ),
+                        'spent_money': openapi.Schema(
+                            type=openapi.TYPE_INTEGER
+                        ),
                         'gems': openapi.Schema(
                             type=openapi.TYPE_ARRAY,
-                            items=openapi.Schema(type=openapi.TYPE_STRING)
+                            items=openapi.Schema(
+                                type=openapi.TYPE_STRING
+                            )
                         ),
                     },
                 )
@@ -39,7 +45,7 @@ deals_response = {
         type=openapi.TYPE_OBJECT,
         properties={
             'Status': openapi.Schema(
-                type=openapi.TYPE_STRING, 
+                type=openapi.TYPE_STRING,
                 description='OK'
             )
         }
@@ -48,7 +54,7 @@ deals_response = {
         type=openapi.TYPE_OBJECT,
         properties={
             'Status': openapi.Schema(
-                type=openapi.TYPE_STRING, 
+                type=openapi.TYPE_STRING,
                 description='Error'
             ),
             'Desc': openapi.Schema(
