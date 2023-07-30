@@ -3,9 +3,9 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ..deals.models import Customer, Deal, Gem
-from ..deals.serializers import CustomerSerializer
-from .schemas import customer_response, deals_response, deals_schema
+from api.schemas import customer_response, deals_response, deals_schema
+from deals.models import Customer, Deal, Gem
+from deals.serializers import CustomerSerializer
 
 
 class CustomerAPIView(APIView):
