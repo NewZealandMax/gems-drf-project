@@ -1,6 +1,7 @@
+from django.db.models import prefetch_related_objects, Prefetch, F, Q
 from rest_framework import serializers
 
-from deals.models import Customer
+from deals.models import Customer, Gem
 
 
 class CustomerSerializer(serializers.ModelSerializer):
@@ -12,16 +13,9 @@ class CustomerSerializer(serializers.ModelSerializer):
         fields = ('username', 'spent_money', 'gems')
 
     def get_gems(self, obj):
-        gems = obj.gems.all()
-        customers = Customer.objects.order_by(
-            '-spent_money'
-        ).exclude(pk=obj.pk).prefetch_related('gems')[:4]
-        customer_gems = [
-            {
-                item['id'] for item in items
-            } for items in [
-                customer.gems.all().values() for customer in customers
-            ]
-        ]
-        top_gems = set().union(*customer_gems)
-        return [str(gem) for gem in gems if gem.pk in top_gems]
+        gems = Gem.objects.filter(
+            customers__in=Customer.objects.order_by(
+                '-spent_money'
+            ).exclude(pk=obj.pk)[:4]
+        ).filter(pk__in=obj.gems.values('pk'))
+        return list(map(str, gems))
