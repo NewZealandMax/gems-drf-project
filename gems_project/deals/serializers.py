@@ -1,4 +1,3 @@
-from django.db.models import prefetch_related_objects, Prefetch, F, Q
 from rest_framework import serializers
 
 from deals.models import Customer, Gem
